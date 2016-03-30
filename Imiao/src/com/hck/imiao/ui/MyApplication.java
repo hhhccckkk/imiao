@@ -19,7 +19,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // B.a(HCK());
         LogUtil.isPrintLog = true;
         context = this;
         new MyPreferences(this);
