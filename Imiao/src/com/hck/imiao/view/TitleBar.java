@@ -19,7 +19,7 @@ public class TitleBar extends LinearLayout {
 	private ImageView mLeftBackBtn; // 左边返回按钮
 	private TextView mCenterTextV; // 中间文本.
 	private Context mContext;
-    private Button rightButton;
+    private TextView rightTextView;
 	public TitleBar(Context context) {
 		super(context);
 		mContext = context;
@@ -41,7 +41,7 @@ public class TitleBar extends LinearLayout {
 		LayoutInflater.from(context).inflate(R.layout.title_bar, this);
 		mLeftBackBtn = (ImageView) findViewById(R.id.titleBackBtn);
 		mCenterTextV = (TextView) findViewById(R.id.titleCenterTV);
-		rightButton =(Button) findViewById(R.id.right_btn);
+		rightTextView =(TextView) findViewById(R.id.right_btn);
 		setListener();
 	}
 
@@ -63,13 +63,14 @@ public class TitleBar extends LinearLayout {
 	public ImageView getLeftBtn(){
 	    return mLeftBackBtn;
 	}
-	public Button getRightBtn(){
-	    rightButton.setVisibility(View.VISIBLE);
-	    return rightButton;
+	public TextView getRightTv(){
+		rightTextView.setVisibility(View.VISIBLE);
+	    return rightTextView;
 	}
 	
-	public void hidenRightBtn(){
-	    rightButton.setVisibility(View.GONE);
+	public void hidenRightTv(){
+		rightTextView.setVisibility(View.GONE);
 	}
+	
 
 }

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/home_title"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:orientation="horizontal" />
+
+        <ImageView
+            android:id="@+id/home_into_video"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/home_into_video" />
+
+        <ImageView
+            android:id="@+id/home_call_img"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_call_img1" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:background="#e5e5e5" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/home_news_nt"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/home_people_nt"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/home_xiangqing_nt"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/home_guanli_nt"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/home_news"
+                style="@style/main_tv_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/home_new"
+                android:gravity="center"
+                android:text="消息" />
+
+            <TextView
+                android:id="@+id/home_people"
+                style="@style/main_tv_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/home_users"
+                android:gravity="center"
+                android:text="成员" />
+
+            <TextView
+                android:id="@+id/home_xiangqing"
+                style="@style/main_tv_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/home_xiangqing"
+                android:gravity="center"
+                android:text="详情" />
+
+            <TextView
+                android:id="@+id/home_guanli"
+                style="@style/main_tv_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/home_guanli"
+                android:gravity="center"
+                android:text="管理" />
+        </LinearLayout>
+            
+        </FrameLayout>
+
+        
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:background="#e5e5e5" />
+
+        <com.hck.imiao.view.MyListview
+            android:id="@+id/home_lv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:divider="@null" />
+    </LinearLayout>
+
+</ScrollView>

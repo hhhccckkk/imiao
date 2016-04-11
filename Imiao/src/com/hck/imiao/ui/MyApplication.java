@@ -25,11 +25,6 @@ public class MyApplication extends Application {
         initImagerLoder();
     }
 
-    static {
-        System.loadLibrary("hck");
-    }
-
-    public native String HCK();
 
     private void initImagerLoder() {
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheOnDisc(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).build();
