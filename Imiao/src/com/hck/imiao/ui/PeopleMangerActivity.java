@@ -1,22 +1,34 @@
 package com.hck.imiao.ui;
 
-import com.hck.imiao.interfaces.BaseMethod;
-
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
+import com.hck.imiao.R;
+import com.hck.imiao.interfaces.BaseMethod;
 
 public class PeopleMangerActivity extends BaseActivity implements BaseMethod,
 		OnClickListener {
 	private TextView titleRighTextView;
 	private TextView userTextView, shengqingTextView;
+	private Fragment fragment;
+	private PeopleFragment peopleFragment;
+	private MaoYaninfoFragment maoYaninfoFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_people_manger);
+		initView();
+		initTitle();
+		initData();
+		setData();
 	}
+
+	
 
 	@Override
 	public void initTitle() {
@@ -41,7 +53,11 @@ public class PeopleMangerActivity extends BaseActivity implements BaseMethod,
 
 	@Override
 	public void setData() {
-
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
+		transaction.replace(R.id.people_content, peopleFragment);
+		transaction.replace(R.id.people_maoyan, maoYaninfoFragment);
+		transaction.commit();
 	}
 
 	@Override
@@ -65,7 +81,7 @@ public class PeopleMangerActivity extends BaseActivity implements BaseMethod,
 		switch (tag) {
 		case 1:
 			userTextView.setBackgroundColor(getResources().getColor(
-					R.color.black));
+					R.color.main_huise));
 			shengqingTextView.setBackgroundColor(getResources().getColor(
 					R.color.white));
 			break;
@@ -73,11 +89,35 @@ public class PeopleMangerActivity extends BaseActivity implements BaseMethod,
 			userTextView.setBackgroundColor(getResources().getColor(
 					R.color.white));
 			shengqingTextView.setBackgroundColor(getResources().getColor(
-					R.color.black));
+					R.color.main_huise));
 			break;
 		default:
 			break;
 		}
+	}
+
+	public void switchContent(Fragment to) {
+		if (fragment != to) {
+			FragmentTransaction transaction = getSupportFragmentManager()
+					.beginTransaction();
+			if (!to.isAdded()) {
+				transaction.hide(fragment).add(R.id.people_content, to)
+						.commit();
+			} else {
+				transaction.hide(fragment).show(to).commit();
+			}
+			fragment = to;
+		}
+
+	}
+
+
+
+	@Override
+	public void initData() {
+		peopleFragment = new PeopleFragment();
+		maoYaninfoFragment = new MaoYaninfoFragment();
+		
 	}
 
 }

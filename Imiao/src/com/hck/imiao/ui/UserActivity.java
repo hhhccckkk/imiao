@@ -2,6 +2,7 @@ package com.hck.imiao.ui;
 
 import android.os.Bundle;
 
+import com.hck.imiao.R;
 import com.hck.imiao.interfaces.BaseMethod;
 
 public class UserActivity extends BaseActivity implements BaseMethod {
@@ -33,6 +34,12 @@ public class UserActivity extends BaseActivity implements BaseMethod {
 	@Override
 	public void setData() {
 
+	}
+
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

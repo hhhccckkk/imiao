@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hck.imiao.R;
 import com.hck.imiao.ui.MyApplication;
-import com.hck.imiao.ui.R;
 
 public class MyToast {
 	 private static Toast sToast;

@@ -2,15 +2,15 @@ package com.hck.imiao.adapter;
 
 import java.util.List;
 
-import com.hck.imiao.bean.NewsBean;
-import com.hck.imiao.ui.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.hck.imiao.R;
+import com.hck.imiao.bean.NewsBean;
 
 public class NewsAdapter extends BaseAdapter {
 	private List<NewsBean> newsBeans;

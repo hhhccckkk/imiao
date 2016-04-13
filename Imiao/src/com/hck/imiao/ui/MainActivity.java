@@ -9,6 +9,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.hck.imiao.R;
+
 public class MainActivity extends TabActivity implements
 		OnCheckedChangeListener {
 	private static final String HOME = "home";

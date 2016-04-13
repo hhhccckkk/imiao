@@ -3,6 +3,7 @@ package com.hck.imiao.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -11,10 +12,10 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hck.imiao.R;
 import com.hck.imiao.adapter.NewsAdapter;
 import com.hck.imiao.bean.NewsBean;
 import com.hck.imiao.interfaces.BaseMethod;
-import com.hck.imiao.util.LogUtil;
 import com.hck.imiao.view.MyListview;
 import com.hck.imiao.view.RemindView;
 
@@ -27,7 +28,8 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 	private RemindView newsRemindView;
 	private TextView newsTvTextView, peopleTextView, xiangqinTextView,
 			guanliTextView;
-    private TextView newNtTextView;
+	private TextView newNtTextView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,16 +51,10 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 		remindView.setTextSize(12); // 文本大小
 		remindView.setBadgeMargin(3); // 各边间隔
 		remindView.show();// 只有显示
-	   LogUtil.D("hhhhhhhhh");
 
 	}
 
-	private void initData() {
-		MaoYaninfoFragment fragment = new MaoYaninfoFragment();
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.home_title, fragment);
-		ft.commit();
-	}
+	
 
 	@Override
 	public void initTitle() {
@@ -81,12 +77,15 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 		peopleTextView.setOnClickListener(this);
 		xiangqinTextView.setOnClickListener(this);
 		guanliTextView.setOnClickListener(this);
-		newNtTextView=(TextView) findViewById(R.id.home_news_nt);
+		newNtTextView = (TextView) findViewById(R.id.home_news_nt);
 	}
 
 	@Override
 	public void getData() {
-
+		MaoYaninfoFragment fragment = new MaoYaninfoFragment();
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.home_title, fragment);
+		ft.commit();
 	}
 
 	@Override
@@ -115,9 +114,19 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 			break;
 		case R.id.home_call_img:
 			break;
+		case R.id.home_people:
+			startActivity(new Intent(HomeActivity.this,PeopleMangerActivity.class));
+			break;
 		default:
 			break;
 		}
 	}
+
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }

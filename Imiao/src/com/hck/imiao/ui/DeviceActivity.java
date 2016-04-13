@@ -1,8 +1,9 @@
 package com.hck.imiao.ui;
 
-import com.hck.imiao.interfaces.BaseMethod;
-
 import android.os.Bundle;
+
+import com.hck.imiao.R;
+import com.hck.imiao.interfaces.BaseMethod;
 
 public class DeviceActivity extends BaseActivity implements BaseMethod {
 	@Override
@@ -34,6 +35,12 @@ public class DeviceActivity extends BaseActivity implements BaseMethod {
 	@Override
 	public void setData() {
 
+	}
+
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

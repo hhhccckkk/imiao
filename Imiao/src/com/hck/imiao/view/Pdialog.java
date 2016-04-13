@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hck.imiao.ui.R;
+import com.hck.imiao.R;
 
 public class Pdialog {
     static Dialog loadingDialog;

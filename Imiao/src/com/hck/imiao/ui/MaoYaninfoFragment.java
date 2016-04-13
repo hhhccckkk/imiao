@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hck.imiao.R;
+
 public class MaoYaninfoFragment extends Fragment {
 	private View view;
 	@Override

@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.hck.imiao.ui.R;
+import com.hck.imiao.R;
 import com.hck.imiao.util.AppManager;
 import com.hck.imiao.view.MyToast;
 
