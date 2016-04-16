@@ -69,9 +69,12 @@ public final class R {
         public static final int update_view_bg_shap=0x7f020020;
         public static final int user1=0x7f020021;
         public static final int user2=0x7f020022;
-        public static final int user_selector=0x7f020023;
-        public static final int zhuce_btn_bg=0x7f020024;
-        public static final int zhuce_btn_p=0x7f020025;
+        public static final int user_bt_bg=0x7f020023;
+        public static final int user_jiantou=0x7f020024;
+        public static final int user_selector=0x7f020025;
+        public static final int user_touxiang=0x7f020026;
+        public static final int zhuce_btn_bg=0x7f020027;
+        public static final int zhuce_btn_p=0x7f020028;
     }
     public static final class id {
         public static final int RadioG=0x7f0a0011;
