@@ -1,6 +1,5 @@
 package com.hck.imiao.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.hck.imiao.interfaces.BaseMethod;
 import com.hck.imiao.view.MyToast;
 import com.hck.imiao.view.TitleBar;
 import com.umeng.analytics.MobclickAgent;
@@ -91,6 +89,8 @@ public class BaseActivity extends FragmentActivity {
 	public void showGetDataError() {
 		MyToast.showCustomerToast("网络异常，获取数据失败");
 	}
+	
+	
 
 
 }

@@ -54,8 +54,6 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 
 	}
 
-	
-
 	@Override
 	public void initTitle() {
 		initTitle("首页");
@@ -115,7 +113,13 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 		case R.id.home_call_img:
 			break;
 		case R.id.home_people:
-			startActivity(new Intent(HomeActivity.this,PeopleMangerActivity.class));
+			startActivity(PeopleMangerActivity.class);
+			break;
+		case R.id.home_xiangqing:
+			startActivity(DeviceXiangXiActivity.class);
+			break;
+		case R.id.home_guanli:
+			startActivity(DeviceMangerActivity.class);
 			break;
 		default:
 			break;
@@ -125,8 +129,7 @@ public class HomeActivity extends BaseActivity implements BaseMethod,
 	@Override
 	public void initData() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
 
 }
