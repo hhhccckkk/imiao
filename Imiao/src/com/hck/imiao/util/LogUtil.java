@@ -12,5 +12,11 @@ public class LogUtil {
 		}
 		
 	}
+	public static void E(String value) {
+		if (isPrintLog) {
+			Log.d(TAG, value);
+		}
+		
+	}
 
 }

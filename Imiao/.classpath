@@ -7,8 +7,8 @@
 	<classpathentry kind="lib" path="libs/jackson-all-1.9.11.jar"/>
 	<classpathentry kind="lib" path="libs/umeng-analytics-v5.5.3.jar"/>
 	<classpathentry kind="lib" path="libs/universal-image-loader-1.8.5.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
