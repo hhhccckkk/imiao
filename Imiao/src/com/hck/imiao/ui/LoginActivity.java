@@ -1,30 +1,33 @@
 package com.hck.imiao.ui;
 
-import java.util.UUID;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 
 import com.hck.imiao.R;
 import com.hck.imiao.data.Constans;
-import com.hck.imiao.socketandudp.MyTcpClient;
-import com.hck.imiao.socketandudp.MyUdpClient;
-import com.hck.imiao.socketandudp.StringUtil;
-import com.hck.imiao.util.LogUtil;
+import com.hck.imiao.udp.Ddclient;
+import com.hck.imiao.udp.ErrorLog;
+import com.hck.imiao.udp.StringUtil;
 
 public class LoginActivity extends Activity {
 	private EditText userNameEditText, pwdEditText;
 	private String userName, password;
-	private String uuID = "c607c75d273644d8996e7efba5846a33";
+	// private String uuID = "c607c75d273644d8996e7efba5846a33";
+	// 10254A35CD5C43C5BDDDCBEF208EA0B1
+	private String uuID = "10254A35CD5C43C5BDDDCBEF208EA0B2";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		initView();
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectDiskReads().detectDiskWrites().detectNetwork()
+				.penaltyLog().build());
 	}
 
 	public void initView() {
@@ -35,55 +38,31 @@ public class LoginActivity extends Activity {
 	public void login(View view) {
 		// startActivity(new Intent(this, MainActivity.class));
 		// finish();
-		 startUDP();
-		//startTCP();
+		startUDP();
+		// startTCP();
 	}
 
-	MyUdpClient myUdpClient;
-	MyTcpClient myTcpClient;
-
-	private void startTCP() {
-		new Thread() {
-
-			public void run() {
-				LogUtil.D("startTCP runrunrun");
-				try {
-					byte[] uuid = StringUtil.md5Byte(uuID);
-					myTcpClient = new MyTcpClient(uuid, 1, Constans.ID_ADDRESS,
-							9966, 1000 * 1);
-					myTcpClient.setHeartbeatInterval(10 * 5);
-					myTcpClient.start();
-					synchronized (myTcpClient) {
-						myTcpClient.wait();
-					}
-					LogUtil.D("startTCP runrunrun222");
-				} catch (Exception e) {
-					e.printStackTrace();
-					LogUtil.D("ExceptionException: "+e.toString());
-					
-				}
-			};
-		}.start();
-
-	}
+	Ddclient myUdpClient;
 
 	private void startUDP() {
 		new Thread() {
-
 			public void run() {
 				try {
-					byte[] uuid = StringUtil.md5Byte(uuID);
-					myUdpClient = new MyUdpClient(uuid, 1, Constans.ID_ADDRESS,
-							9966);
-					myUdpClient.setHeartbeatInterval(10 * 5);
+					String Uuid = "10254A35CD5C43C5BDDDCBEF208EA0B8";// 10254A35CD5C43C5BDDDCBEF208EA0B1
+					byte[] uuid = StringUtil.hexStringToByteArray(Uuid);
+					Ddclient myUdpClient = new Ddclient(uuid, 1,
+							Constans.ID_ADDRESS, 9966);
+					myUdpClient.setHeartbeatInterval(3);
 					myUdpClient.start();
 					synchronized (myUdpClient) {
 						myUdpClient.wait();
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
+					ErrorLog.Log(e.getMessage());
 				}
-			};
+
+			}
 		}.start();
 
 	}
@@ -101,7 +80,6 @@ public class LoginActivity extends Activity {
 		super.onDestroy();
 		try {
 			myUdpClient.stop();
-			myTcpClient.stop();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
