@@ -10,6 +10,10 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.hck.imiao.R;
+import com.hck.imiao.udp.Ddclient.OnUDPListener;
+import com.hck.imiao.udp.MyUDP;
+import com.hck.imiao.util.LogUtil;
+import com.hck.imiao.util.MyUtils;
 
 public class MainActivity extends TabActivity implements
 		OnCheckedChangeListener {
@@ -21,7 +25,8 @@ public class MainActivity extends TabActivity implements
 	private TabSpec tabSpec1, tabSpec2, tabSpec3; // 现象卡对象
 	public static RadioButton button1, button2, button3; // 设置背景
 	private RadioGroup radioGroup;
-
+    private String [] dataStrings;
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +34,23 @@ public class MainActivity extends TabActivity implements
 		initView();
 		addSpec();
 		setListener();
+		MyUDP.startUdp(new OnUDPListener() {
+
+			@Override
+			public void getMessage(String msg) {
+				LogUtil.D("msgmsgmsg: "+msg);
+                dataStrings=MyUtils.getStrings(msg);
+                if (dataStrings!=null) {
+                	startPlayerActivity(dataStrings[3]);
+				}
+			}
+		});
+	}
+	private void startPlayerActivity(String token){
+		Intent intent=new Intent();
+		intent.putExtra("token", token);
+		intent.setClass(this, PlayerActivity.class);
+		startActivity(intent);
 	}
 
 	private void initView() {
@@ -99,6 +121,12 @@ public class MainActivity extends TabActivity implements
 		default:
 			break;
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		MyUDP.stopUDP();
 	}
 
 }

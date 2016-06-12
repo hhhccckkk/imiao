@@ -10,17 +10,20 @@ import android.os.Bundle;
 import com.hck.imiao.R;
 import com.hck.imiao.util.LogUtil;
 
-public class PlayerActivity extends Activity {
+public class PlayerActivity extends BaseActivity {
 	private String path;
 
 	private VideoView mVideoView;
-
+    private String token;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_player);
+		initTitle("流直播界面");
 		mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-		path = "rtmp://119.6.127.229:1935/myapp/10254A35CD5C43C5BDDDCBEF208EA0A1";
+		token=getIntent().getStringExtra("token");
+		path = "rtmp://119.6.127.229:1935/myapp/"+token;
+		LogUtil.D("pathpathpathpath: "+path);
 		mVideoView.setVideoPath(path);
 		mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_LOW);
 		mVideoView.setOnErrorListener(new OnErrorListener() {
@@ -44,5 +47,10 @@ public class PlayerActivity extends Activity {
 		});
 		LogUtil.D("PlayerActivity onCreate");
 	}
+	
+	private void tuiLiu(){
+		
+	}
+	
 	
 }
