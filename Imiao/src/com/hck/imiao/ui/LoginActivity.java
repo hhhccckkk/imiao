@@ -1,5 +1,6 @@
 package com.hck.imiao.ui;
 
+import io.vov.vitamio.Vitamio;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Vitamio.isInitialized(this);
 		setContentView(R.layout.activity_login);
 		initView();
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -38,8 +40,15 @@ public class LoginActivity extends Activity {
 	public void login(View view) {
 		// startActivity(new Intent(this, MainActivity.class));
 		// finish();
-		startUDP();
+		 startUDP();
 		// startTCP();
+		
+	}
+
+	private void startPlayerActivity() {
+		Intent intent = new Intent();
+		intent.setClass(this, PlayerActivity.class);
+		startActivity(intent);
 	}
 
 	Ddclient myUdpClient;
@@ -48,7 +57,7 @@ public class LoginActivity extends Activity {
 		new Thread() {
 			public void run() {
 				try {
-					String Uuid = "10254A35CD5C43C5BDDDCBEF208EA0B8";// 10254A35CD5C43C5BDDDCBEF208EA0B1
+					String Uuid = "10254A35CD5C43C5BDDDCBEF208EA0A1";// 10254A35CD5C43C5BDDDCBEF208EA0B1
 					byte[] uuid = StringUtil.hexStringToByteArray(Uuid);
 					Ddclient myUdpClient = new Ddclient(uuid, 1,
 							Constans.ID_ADDRESS, 9966);
@@ -68,7 +77,8 @@ public class LoginActivity extends Activity {
 	}
 
 	public void register(View view) {
-		startActivity(new Intent(this, RegisterActivity.class));
+		//startActivity(new Intent(this, RegisterActivity.class));
+		startPlayerActivity();
 	}
 
 	public void getPwd(View view) {
