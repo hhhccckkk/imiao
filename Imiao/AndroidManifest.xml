@@ -50,6 +50,7 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <service android:name="com.hck.imiao.service.MessageService"></service>
     </application>
 
 </manifest>

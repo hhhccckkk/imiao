@@ -1,8 +1,12 @@
 package com.hck.imiao.ui;
 
 import android.app.TabActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -10,7 +14,8 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.hck.imiao.R;
-import com.hck.imiao.udp.Ddclient.OnUDPListener;
+import com.hck.imiao.data.Constans;
+import com.hck.imiao.service.MessageService;
 import com.hck.imiao.udp.MyUDP;
 import com.hck.imiao.util.LogUtil;
 import com.hck.imiao.util.MyUtils;
@@ -25,7 +30,9 @@ public class MainActivity extends TabActivity implements
 	private TabSpec tabSpec1, tabSpec2, tabSpec3; // 现象卡对象
 	public static RadioButton button1, button2, button3; // 设置背景
 	private RadioGroup radioGroup;
-    private String [] dataStrings;
+	private String[] dataStrings;
+	private Receiver receiver;
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +41,57 @@ public class MainActivity extends TabActivity implements
 		initView();
 		addSpec();
 		setListener();
-		MyUDP.startUdp(new OnUDPListener() {
+		startService();
+		registerReceiver();
 
-			@Override
-			public void getMessage(String msg) {
-				LogUtil.D("msgmsgmsg: "+msg);
-                dataStrings=MyUtils.getStrings(msg);
-                if (dataStrings!=null) {
-                	startPlayerActivity(dataStrings[3]);
-				}
-			}
-		});
 	}
-	private void startPlayerActivity(String token){
-		Intent intent=new Intent();
+
+	private void startService() {
+		Intent intent = new Intent();
+		intent.setClass(this, MessageService.class);
+		startService(intent);
+	}
+
+	private void registerReceiver() {
+		receiver = new Receiver();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(Constans.ACTION_GET_MESSAGE);
+		registerReceiver(receiver, intentFilter);
+	}
+
+	class Receiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			
+			int type = arg1.getIntExtra("type", 0);
+			switch (type) {
+			case Constans.KEY_UDP_GET_MESSAGE:
+				String msgString = arg1.getStringExtra("msg");
+				if (!TextUtils.isEmpty(msgString)) {
+					dataStrings = MyUtils.getStrings(msgString);
+					if (dataStrings.length>=3) {
+						startPlayerActivity(dataStrings[3]);
+					}
+				}
+				break;
+			case Constans.KEY_UDP_CONNECTION_OK:
+                 LogUtil.D("连接成功");
+				break;
+			case Constans.KEY_UDP_CONNECTION_ERROR:
+				 LogUtil.D("连接失败");
+				break;
+
+			default:
+				break;
+			}
+
+		}
+
+	}
+
+	private void startPlayerActivity(String token) {
+		Intent intent = new Intent();
 		intent.putExtra("token", token);
 		intent.setClass(this, PlayerActivity.class);
 		startActivity(intent);
@@ -122,6 +166,7 @@ public class MainActivity extends TabActivity implements
 			break;
 		}
 	}
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

@@ -4,13 +4,13 @@ import com.hck.imiao.data.Constans;
 import com.hck.imiao.udp.Ddclient.OnUDPListener;
 
 public class MyUDP {
-	private static String uuID = "10254A35CD5C43C5BDDDCBEF208EA0A8";
+	
 	static Ddclient myUdpClient;
 	public static void startUdp(final OnUDPListener listener) {
 		new Thread() {
 			public void run() {
 				try {
-					byte[] uuid = StringUtil.hexStringToByteArray(uuID);
+					byte[] uuid = StringUtil.hexStringToByteArray(Constans.uuID);
 					myUdpClient= new Ddclient(uuid, 1,
 							Constans.ID_ADDRESS, 9966,listener);
 					myUdpClient.setHeartbeatInterval(3);

@@ -14,18 +14,21 @@ public class Request {
 
    
 
-    public static void post(String method, RequestParams params, HCKHttpResponseHandler handler) {
-        client.post(Urls.MAIN_HOST_URL + method, params, handler);
+    public static void post(RequestParams params, HCKHttpResponseHandler handler) {
+        client.post(Urls.MAIN_HOST_URL+"requestType=UserCreateMeet", params, handler);
     }
 
-    private static void get(String method, HCKHttpResponseHandler handler) {
+    public static void get(HCKHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
-        get(method, params, handler);
+        get(params, handler);
     }
 
-    public static void get(String method, RequestParams params, HCKHttpResponseHandler handler) {
-        client.get(Urls.MAIN_HOST_URL + method, params, handler);
+    public static void get(RequestParams params, HCKHttpResponseHandler handler) {
+        client.get(Urls.MAIN_HOST_URL, params, handler);
     }
+    
+    
+  
 
    
 }
