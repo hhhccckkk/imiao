@@ -81,7 +81,8 @@ public class PlayerActivity extends BaseActivity implements
 	}
 
 	private void tuiLiu() {
-		livePusher.startPusher(Constans.HOST + MyUtils.getUUID());
+		UUID=MyUtils.getUUID();
+		livePusher.startPusher(Constans.HOST + UUID);
 
 	}
 
@@ -131,7 +132,7 @@ public class PlayerActivity extends BaseActivity implements
 		}
 		LogUtil.D("requestParam: " + requestParam);
 		RequestParams params = new RequestParams();
-		//params.put("requestType", "UserCreateMeet");
+		params.put("requestType", "UserCreateMeet");
 		params.put("requestParam", requestParam);
 		Request.post(params, new HCKHttpResponseHandler() {
 			public void onFailure(Throwable error, String content) {

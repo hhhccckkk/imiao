@@ -15,7 +15,7 @@ public class Request {
    
 
     public static void post(RequestParams params, HCKHttpResponseHandler handler) {
-        client.post(Urls.MAIN_HOST_URL+"requestType=UserCreateMeet", params, handler);
+        client.post(Urls.MAIN_HOST_URL, params, handler);
     }
 
     public static void get(HCKHttpResponseHandler handler) {
