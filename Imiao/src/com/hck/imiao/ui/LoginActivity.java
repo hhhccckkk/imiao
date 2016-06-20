@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
 
 	public void register(View view) {
 		//startActivity(new Intent(this, RegisterActivity.class));
-		startPlayerActivity();
+		//startPlayerActivity();
 	}
 
 	public void getPwd(View view) {

@@ -19,6 +19,7 @@ import com.hck.imiao.data.Constans;
 import com.hck.imiao.net.Request;
 import com.hck.imiao.util.JsonUtils;
 import com.hck.imiao.util.LogUtil;
+import com.hck.imiao.util.MD5;
 import com.hck.imiao.util.MyUtils;
 import com.jutong.live.LivePusher;
 import com.jutong.live.LiveStateChangeListener;
@@ -81,7 +82,7 @@ public class PlayerActivity extends BaseActivity implements
 	}
 
 	private void tuiLiu() {
-		UUID=MyUtils.getUUID();
+		UUID = MyUtils.getUUID();
 		livePusher.startPusher(Constans.HOST + UUID);
 
 	}
@@ -114,6 +115,8 @@ public class PlayerActivity extends BaseActivity implements
 	 * UserKey:1 关联的瞄眼设备编号:385D9A05D7694F49A8D1C5773A24AC6D 关联的瞄眼的DevKey:1
 	 */
 	private void sendDataToServer() {
+		LogUtil.D("sendDataToServersendDataToServersendDataToServer");
+		String time=MyUtils.getNowDate().toString();
 		BackMessageBean messageBean = new BackMessageBean();
 		messageBean.setPhoneNumber("18140249916");
 		messageBean.setUserKey(1);
@@ -121,19 +124,22 @@ public class PlayerActivity extends BaseActivity implements
 		messageBean.setMessageKey(token);
 		messageBean.setUserMessage(UUID);
 		messageBean
-				.setSendMessageTime(new Timestamp(System.currentTimeMillis())
-						.toString());
-		messageBean.setRandomKey("ddddddd");
-		messageBean.setUniqueID("sddddd");
+				.setSendMessageTime(time);
+		
+		String RandomKey=java.util.UUID.randomUUID().toString();
+		
+		messageBean.setRandomKey(RandomKey);
+		messageBean.setUniqueID(MD5.MD5("385D9A05D7694F49A8D1C5773A24AC6D"+RandomKey+time+MD5.MD5("123321")));
 		String requestParam = null;
 		try {
 			requestParam = JsonUtils.toString(messageBean);
 		} catch (Exception e) {
+			LogUtil.D("Exception: "+e.toString());
 		}
-		LogUtil.D("requestParam: " + requestParam);
 		RequestParams params = new RequestParams();
-		params.put("requestType", "UserCreateMeet");
+		//params.put("requestType", "UserJoinMeet");
 		params.put("requestParam", requestParam);
+		LogUtil.D("data: "+params.toString());
 		Request.post(params, new HCKHttpResponseHandler() {
 			public void onFailure(Throwable error, String content) {
 				LogUtil.D("onFailure: " + content + error);
@@ -148,6 +154,16 @@ public class PlayerActivity extends BaseActivity implements
 				LogUtil.D("onFinish: " + content + requestUrl);
 			};
 		});
+		// LogUtil.D("paramsparamsparams: "+params.toString());
+		// Request.post(this, params.toString(), new HCKHttpResponseHandler() {
+		// public void onFailure(Throwable error, String content) {
+		// LogUtil.D("onFailureonFailure: "+content+error);
+		// };
+		//
+		// public void onSuccess(String content, String requestUrl) {
+		// LogUtil.D("onSuccess: "+content);
+		// };
+		// });
 
 	}
 

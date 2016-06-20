@@ -1,8 +1,10 @@
 package com.hck.imiao.ui;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -63,23 +65,21 @@ public class MainActivity extends TabActivity implements
 
 		@Override
 		public void onReceive(Context arg0, Intent arg1) {
-			
+
 			int type = arg1.getIntExtra("type", 0);
 			switch (type) {
 			case Constans.KEY_UDP_GET_MESSAGE:
 				String msgString = arg1.getStringExtra("msg");
 				if (!TextUtils.isEmpty(msgString)) {
 					dataStrings = MyUtils.getStrings(msgString);
-					if (dataStrings.length>=3) {
-						startPlayerActivity(dataStrings[3]);
-					}
+                       alertd(dataStrings[3]);
 				}
 				break;
 			case Constans.KEY_UDP_CONNECTION_OK:
-                 LogUtil.D("连接成功");
+				LogUtil.D("连接成功");
 				break;
 			case Constans.KEY_UDP_CONNECTION_ERROR:
-				 LogUtil.D("连接失败");
+				LogUtil.D("连接失败");
 				break;
 
 			default:
@@ -87,6 +87,20 @@ public class MainActivity extends TabActivity implements
 			}
 
 		}
+
+	}
+
+	private void alertd(final String token) {
+		new AlertDialog.Builder(this).setTitle("来电").setMessage("收到来电，是否接听")
+				.setNegativeButton("挂断", null).setPositiveButton("接听", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+
+						startPlayerActivity(token);
+
+					}
+				}).show();
 
 	}
 

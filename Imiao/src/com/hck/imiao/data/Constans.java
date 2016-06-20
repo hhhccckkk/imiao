@@ -3,7 +3,7 @@ package com.hck.imiao.data;
 public class Constans {
 	public static String ID_ADDRESS = "119.6.127.229";
 	public static String HOST="rtmp://119.6.127.229:1935/myapp/";
-	public static String uuID = "10254A35CD5C43C5BDDDCBEF208EA0A8";
+	public static String uuID = "9444D4097E774DCCA9FD01CD53D8F745";
 	public static String TOKEN = "10254A35CD5C43C5BDDDCBEF208EA0A5";
 	public static String ACTION_GET_MESSAGE = "com.hck.udp.action";
 
