@@ -20,6 +20,7 @@ import com.hck.imiao.net.Request;
 import com.hck.imiao.util.JsonUtils;
 import com.hck.imiao.util.LogUtil;
 import com.hck.imiao.util.MD5;
+import com.hck.imiao.util.Md5Util;
 import com.hck.imiao.util.MyUtils;
 import com.jutong.live.LivePusher;
 import com.jutong.live.LiveStateChangeListener;
@@ -115,8 +116,8 @@ public class PlayerActivity extends BaseActivity implements
 	 * UserKey:1 关联的瞄眼设备编号:385D9A05D7694F49A8D1C5773A24AC6D 关联的瞄眼的DevKey:1
 	 */
 	private void sendDataToServer() {
-		LogUtil.D("sendDataToServersendDataToServersendDataToServer");
-		String time=MyUtils.getNowDate().toString();
+		LogUtil.D("sendDataToServersendDataToServersendDataToServer111");
+		String time=new Timestamp(System.currentTimeMillis()).toString();
 		BackMessageBean messageBean = new BackMessageBean();
 		messageBean.setPhoneNumber("18140249916");
 		messageBean.setUserKey(1);
@@ -126,10 +127,9 @@ public class PlayerActivity extends BaseActivity implements
 		messageBean
 				.setSendMessageTime(time);
 		
-		String RandomKey=java.util.UUID.randomUUID().toString();
-		
+		String RandomKey=java.util.UUID.randomUUID().toString().replaceAll("-", "");
 		messageBean.setRandomKey(RandomKey);
-		messageBean.setUniqueID(MD5.MD5("385D9A05D7694F49A8D1C5773A24AC6D"+RandomKey+time+MD5.MD5("123321")));
+		messageBean.setUniqueID(Md5Util.MD5("385D9A05D7694F49A8D1C5773A24AC6D"+RandomKey+time+Md5Util.MD5("123321")));
 		String requestParam = null;
 		try {
 			requestParam = JsonUtils.toString(messageBean);
